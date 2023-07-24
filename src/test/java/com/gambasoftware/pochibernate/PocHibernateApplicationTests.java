@@ -1,4 +1,4 @@
-package com.gambasoftware.poc.pochibernate;
+package com.gambasoftware.pochibernate;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
