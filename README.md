@@ -6,3 +6,19 @@ You can do that by setting the fetch attribute on the @ManyToOne or @OneToOne an
 
 @ManyToOne(fetch=FetchType.LAZY)
 
+### TODO
+- 1 create data structure
+  - tables
+  - populate with data
+- 2 create scenarios with FetchTypes
+  - generate metrics
+- 3 create scenarios with Indexes
+  - generate metrics
+- 4 create scenarios with Caches
+  - enable cache level 1
+  - enable cache level 2
+  - generate metrics
+- 5 create scenarios using batch process
+  - generate metrics
+- 6 generate reports
+  - done
