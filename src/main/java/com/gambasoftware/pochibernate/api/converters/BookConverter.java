@@ -9,7 +9,7 @@ import java.util.Set;
 public class BookConverter {
     public static BookModel convert(Book book) {
         return BookModel.BookModelBuilder.aBookModel()
-                .withId(book.getBookId())
+                .withId(book.getId())
                 .withName(book.getName())
                 .withAuthors(AuthorConverter.convert(book.getAuthors()))
                 .build();
@@ -19,7 +19,7 @@ public class BookConverter {
         Set<BookModel> bookModels = new HashSet<>();
         for (Book book : books) {
             bookModels.add(BookModel.BookModelBuilder.aBookModel()
-                    .withId(book.getBookId())
+                    .withId(book.getId())
                     .withName(book.getName())
                     .build());
         }

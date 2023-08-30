@@ -7,42 +7,48 @@ import com.gambasoftware.pochibernate.observability.MetricsService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class BookService {
     private BookRepository bookRepository;
     private AuthorService authorService;
+    private MetricsService metricsService;
 
-    public BookService(BookRepository bookRepository, AuthorService authorService) {
+    public BookService(BookRepository bookRepository, AuthorService authorService, MetricsService metricsService) {
         this.bookRepository = bookRepository;
         this.authorService = authorService;
+        this.metricsService = metricsService;
     }
 
     public List<Book> list() {
         return bookRepository.findAll();
     }
 
-    @Transactional
+    //@Transactional
     public Book save(Book book) {
-        for (Author a : book.getAuthors()) {
+        Set<Author> authors = book.getAuthors();
+        book.setAuthors(new HashSet<>());
+        for (Author a : authors) {
             Author author = authorService.get(a.getAuthorId());
             if (author != null) {
                 book.getAuthors().add(author);
             }
         }
 
-        long startTime = System.currentTimeMillis();
+        long startTime = System.nanoTime();
         Book bookSaved = bookRepository.save(book);
-        MetricsService.saveMetric(BookService.class.getSimpleName() + ".save", new AtomicLong(System.currentTimeMillis() - startTime));
+        metricsService.saveMetric(BookService.class.getSimpleName(), ".save", new AtomicLong(System.nanoTime() - startTime));
         return bookSaved;
     }
 
     public Book get(Long bookId) {
-        long startTime = System.currentTimeMillis();
+        long startTime = System.nanoTime();
         Book book = bookRepository.findById(bookId).orElse(null);
-        MetricsService.saveMetric(BookService.class.getSimpleName() + ".get", new AtomicLong(System.currentTimeMillis() - startTime));
+        metricsService.saveMetric(BookService.class.getSimpleName(), ".get", new AtomicLong(System.nanoTime() - startTime));
         return book;
     }
 }

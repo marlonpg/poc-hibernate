@@ -1,20 +1,30 @@
 package com.gambasoftware.pochibernate.data.entities;
 
-import javax.persistence.*;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import javax.persistence.Cacheable;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+//@Cacheable
+//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Author {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long authorId;
     private String name;
-    @ManyToMany(cascade = {
-            CascadeType.MERGE
-    },
+    @ManyToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
-    mappedBy = "authors")
+            mappedBy = "authors")
     private Set<Book> books = new HashSet<>();
 
     public Long getAuthorId() {
