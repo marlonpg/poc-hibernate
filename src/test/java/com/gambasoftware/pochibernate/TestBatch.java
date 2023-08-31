@@ -19,26 +19,20 @@ public class TestBatch {
     @PersistenceContext
     private EntityManager entityManager;
 
-    private static final int BATCH_SIZE = 5;
+    private int BATCH_SIZE = 50;
+
 
     @Transactional
     @Test
-    public void whenInsertingSingleTypeOfEntity_thenCreatesSingleBatch() {
-        for (int i = 0; i < 10000000; i++) {
-            Book book = new Book();
-            book.setName("New book batch test");
-            entityManager.persist(book);
-        }
-    }
-
-    @Transactional
-    @Test
-    public void whenNotConfigured_ThenSendsInsertsSeparately() {
-        for (int i = 0; i < 10; i++) {
+    public void whenInsertingSingleTypeOfEntity_thenCreatesSingleBatch0() {
+        for (int i = 0; i < 100000; i++) {
+            if (i > 0 && i % BATCH_SIZE == 0) {
+                entityManager.flush();
+                entityManager.clear();
+            }
             Book book = new Book();
             book.setName("New book batch test" + i);
             entityManager.persist(book);
         }
-        entityManager.flush();
     }
 }

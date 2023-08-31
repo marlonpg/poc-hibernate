@@ -97,6 +97,7 @@ pooled-lo: It’s similar to the pooled optimizer but the database sequence valu
 https://vladmihalcea.com/hibernate-hidden-gem-the-pooled-lo-optimizer/
 
 GenerationType.UUID
+https://www.baeldung.com/java-hibernate-uuid-primary-key
 
 Although the TABLE generator addresses the portability concern, in reality, it performs poorly because it requires emulating a database sequence using a separate transaction and row-level locks. For this reason, the choice is usually between IDENTITY and SEQUENCE.
 https://www.baeldung.com/hibernate-identifiers
@@ -122,6 +123,7 @@ Hibernate supports lazy loading, which loads associated entities only when they 
 The JPA documentation recommends using the FetchType.LAZY strategy whenever possible, and the Entity Graph when we need to load an association.
 
 #Avoid N+1 query issue
+which occurs when Hibernate has to perform an additional query to initialize a relationship for each of the selected n entities.
 Moreover, if you forget to JOIN FETCH an EAGER association in a JPQL query, Hibernate will initialize it with a secondary statement, which in turn can lead to N+1 query issues.
 Or we can use EntityGraph to dynamically handle that, it can be used in query hints
 https://medium.com/geekculture/jpa-entitygraphs-a-solution-to-n-1-query-problem-e29c28abe5fb
@@ -131,3 +133,7 @@ Use batch fetching to load multiple entities in a single query, reducing the num
 1- falar sobre uso de batch e os beneficios
 -1 generate metrics with and without
 -2 code example
+
+
+Query tunning
+https://thorben-janssen.com/hibernate-performance-tuning/

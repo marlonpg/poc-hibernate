@@ -19,14 +19,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-//@Cacheable
-//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Book {
-    @Id
-    //analisar os tipos de GenerationType e GenericGenerator
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
 
-//    @GeneratedValue(generator = "sequence-generator")
+    //    @GeneratedValue(generator = "sequence-generator")
 //    @GenericGenerator(
 //            name = "sequence-generator",
 //            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
@@ -36,6 +33,8 @@ public class Book {
 //                    @Parameter(name = "increment_size", value = "1")
 //            }
 //    )
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String name;
     @ManyToMany(cascade = {CascadeType.ALL},

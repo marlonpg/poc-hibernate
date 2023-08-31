@@ -15,8 +15,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-//@Cacheable
-//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
