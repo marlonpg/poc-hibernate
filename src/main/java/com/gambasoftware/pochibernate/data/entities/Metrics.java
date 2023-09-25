@@ -9,19 +9,18 @@ import java.time.LocalDateTime;
 @Entity
 public class Metrics {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
     private String className;
     private String method;
     private Long nanoseconds;
     private String scenario;
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

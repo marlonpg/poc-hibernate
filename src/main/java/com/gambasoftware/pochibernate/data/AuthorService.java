@@ -27,7 +27,7 @@ public class AuthorService {
         long startTime = System.nanoTime();
         Author author = authorRepository.findById(authorId)
                 .orElse(null);
-        metricsService.saveMetric(AuthorService.class.getSimpleName(), ".get", new AtomicLong(System.nanoTime() - startTime));
+        //metricsService.saveMetric(AuthorService.class.getSimpleName(), ".get", new AtomicLong(System.nanoTime() - startTime));
         return author;
     }
 

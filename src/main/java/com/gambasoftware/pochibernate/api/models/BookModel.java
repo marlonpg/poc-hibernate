@@ -2,6 +2,7 @@ package com.gambasoftware.pochibernate.api.models;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 public class BookModel {
     private Long id;

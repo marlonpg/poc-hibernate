@@ -50,11 +50,11 @@ public class BookService {
 
         //entityManager.persist(book);
         Book bookSaved = bookRepository.save(book);
-        metricsService.saveMetric(BookService.class.getSimpleName(), ".save", new AtomicLong(System.nanoTime() - startTime), scenario);
+        //metricsService.saveMetric(BookService.class.getSimpleName(), ".save", new AtomicLong(System.nanoTime() - startTime), scenario);
         return bookSaved;
     }
 
-    public Book get(Long bookId) {
+    public Book get(String bookId) {
         long startTime = System.nanoTime();
         Book book = bookRepository.findById(bookId).orElse(null);
         metricsService.saveMetric(BookService.class.getSimpleName(), ".get", new AtomicLong(System.nanoTime() - startTime));

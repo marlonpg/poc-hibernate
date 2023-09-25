@@ -10,13 +10,16 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Cacheable
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Table(indexes = @Index(columnList = "name"))
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

@@ -2,8 +2,6 @@ package com.gambasoftware.pochibernate.data.entities;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 
 import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
@@ -34,7 +32,9 @@ public class Book {
 //            }
 //    )
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(generator = "uuid-hibernate-generator")
+//    @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
     private Long id;
     private String name;
     @ManyToMany(cascade = {CascadeType.ALL},
